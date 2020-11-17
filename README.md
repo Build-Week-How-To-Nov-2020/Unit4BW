@@ -67,7 +67,7 @@ ONLINE API-DOCUMENTATION
 Endpoints
 Method	Endpoint	Description
 POST	(/api/v1/signup)	Creates a new user using the information   {fullname,username, email, password (and guide which false by default), profileimage} sent inside the request body.
-POST	/api/v1/login	logs in a signed user using information {username or email and password} sent inside of the request body.
+POST	/api/v1/signin	logs in a signed user using information {username or email and password} sent inside of the request body.
 GET	/api/v1/users	Get all registered users.
 GET/:id	/api/v1/users/:id	Get a registered users.
 GET	/api/v1/profile/guides	Get all registered guides.

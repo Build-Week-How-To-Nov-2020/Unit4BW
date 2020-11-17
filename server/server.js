@@ -1,32 +1,29 @@
 const express = require('express');
-const cors = require('cors');
 const helmet = require('helmet');
-const cookie = require("cookie-parser")
+const cors = require('cors');
+const routes = require('../routes/routes');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('../ApiDoc.json');
 
+const server = express();
+server.use(helmet());
+server.use(cors());
+server.use(express.json());
+server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-//need to require routers, and authorization
-const server = express()
-
-server.use(helmet())
-server.use(cors())
-server.use(cookie())
-server.use(express.json())
-
-// add browser routes and router
-//server.use(``)
-//server.use(``)
+server.use('/api/v1', routes);
 
 server.get('/', (req, res) => {
-    res.status(200).json({
-      status: 200,
-      message: 'Welcome'
-    });
+  res.status(200).json({
+    status: 200,
+    message: 'Welcome'
   });
-  
-  server.get('*', (req, res) => {
-    res.status(404).json({
-      message: 'Invalid routes'
-    });
+});
+
+server.get('*', (req, res) => {
+  res.status(404).json({
+    message: 'Invalid routes'
   });
-  
+});
+
 module.exports = server;
